@@ -12,7 +12,6 @@
       background: #fff8f0;
       color: #333;
     }
-
     header {
       background-color: #d6336c;
       color: white;
@@ -22,7 +21,6 @@
       font-size: 2.5rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
     nav {
       background: #f8d7da;
       display: flex;
@@ -31,7 +29,6 @@
       gap: 1rem;
       padding: 1rem;
     }
-
     nav a {
       text-decoration: none;
       color: #d6336c;
@@ -39,30 +36,27 @@
       padding: 0.5rem 1rem;
       border-radius: 5px;
       transition: background 0.3s ease;
+      cursor: pointer;
     }
-
     nav a:hover {
       background: #ffe3ec;
     }
-
     .section {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
       padding: 2rem;
     }
-
     .section h2 {
       font-size: 1.8rem;
       color: #b03060;
       margin-bottom: 1rem;
     }
-
     .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
+      margin-bottom: 2rem;
     }
-
     .category {
       background: #fff;
       border: 1px solid #f3c2d3;
@@ -71,36 +65,95 @@
       text-align: center;
       font-weight: 600;
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
-
     .category:hover {
       transform: scale(1.05);
       background: #fff0f5;
     }
-
     .category img {
       width: 100%;
       border-radius: 8px;
       margin-bottom: 10px;
+      height: 120px;
+      object-fit: cover;
     }
-
+    .products-view {
+      display: none;
+      animation: fadeIn 0.4s;
+    }
+    .products-view.active {
+      display: block;
+    }
+    .products-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .back-link {
+      color: #d6336c;
+      margin-right: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .product-card {
+      background: #fff;
+      border: 1px solid #f3c2d3;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      min-height: 290px;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card img {
+      width: 100%;
+      max-width: 150px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      background: #ffe3ec;
+    }
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+      align-items: center;
+    }
+    .product-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #b03060;
+    }
+    .product-price {
+      color: #d6336c;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
     .contact {
       background: #fce4ec;
       border-radius: 10px;
       padding: 1.5rem;
       margin-top: 2rem;
     }
-
     .contact p {
       margin: 0.5rem 0;
     }
-
     .contact a {
       color: #d6336c;
       text-decoration: none;
       font-weight: 600;
     }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -108,15 +161,33 @@
       color: white;
       margin-top: 2rem;
     }
-
     @media (max-width: 600px) {
       header {
         font-size: 1.8rem;
       }
-
       .section h2 {
         font-size: 1.4rem;
       }
+      .products-header h3 {
+        font-size: 1rem;
+      }
+      .categories {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+      .products {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+      .product-card {
+        min-width: 120px;
+      }
+      .product-card img {
+        max-width: 110px;
+        height: 120px;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -126,45 +197,236 @@
 
   <nav>
     <a href="#">Home</a>
-    <a href="#">Categories</a>
+    <a id="categoriesNav">Categories</a>
     <a href="#">Cart (0)</a>
-    <a href="#">Contact</a>
   </nav>
 
   <div class="section">
-    <h2>🛍️ Shop by Category</h2>
-    <div class="categories">
-      <div class="category">
-        <img src="https://images.pexels.com/photos/1616401/pexels-photo-1616401.jpeg" alt="Kashmire Dresses">
-        <p>Kashmire Dresses</p>
+    <div id="categoriesGrid">
+      <h2>🛍️ Shop by Category</h2>
+      <div class="categories">
+        <div class="category" data-category="kashmire">
+          <img src="https://images.pexels.com/photos/1616401/pexels-photo-1616401.jpeg" alt="Kashmire Dresses">
+          <p>Kashmire Dresses</p>
+        </div>
+        <div class="category" data-category="suits">
+          <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/adult-1867483_1280.jpg" alt="Suits">
+          <p>Suits</p>
+        </div>
+        <div class="category" data-category="long-frocks">
+          <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Long Frocks">
+          <p>Long Frocks</p>
+        </div>
+        <div class="category" data-category="chicken-kury">
+          <img src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/12345678/2021/7/15/12345678.jpg" alt="Chicken Kury Dresses">
+          <p>Chicken Kury Dresses</p>
+        </div>
+        <div class="category" data-category="anarkali">
+          <img src="https://cdn.pixabay.com/photo/2020/01/20/18/38/woman-4779383_1280.jpg" alt="Anarkali Dresses">
+          <p>Anarkali Dresses</p>
+        </div>
+        <div class="category" data-category="mall-cotton">
+          <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/products/IndigoCottonDress.jpg?v=1644567890" alt="Mall Cotton Dresses">
+          <p>Mall Cotton Dresses</p>
+        </div>
+        <div class="category" data-category="lehenga">
+          <img src="https://images.pexels.com/photos/1616402/pexels-photo-1616402.jpeg" alt="Lehenga's">
+          <p>Lehenga's</p>
+        </div>
+        <div class="category" data-category="dupatta">
+          <img src="https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg" alt="Dupatta's">
+          <p>Dupatta's</p>
+        </div>
       </div>
-      <div class="category">
-        <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/adult-1867483_1280.jpg" alt="Suits">
-        <p>Suits</p>
+    </div>
+
+    <!-- Kashmire Dresses Products -->
+    <div class="products-view" id="kashmire-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Kashmire Dresses</h3>
       </div>
-      <div class="category">
-        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Long Frocks">
-        <p>Long Frocks</p>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/your_image1.jpg" alt="Elegant Red Kashmire Dress">
+          <div class="product-info">
+            <span class="product-name">Elegant Red Kashmire Dress</span>
+            <span class="product-price">₹2999</span>
+          </div>
+        </div>
+        <!-- Repeat for up to 30+ products, updating image, name, price -->
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Kashmire Dress (To Add)">
+          <div class="product-info">
+            <span class="product-name">Kashmire Dress (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
       </div>
-      <div class="category">
-        <img src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/12345678/2021/7/15/12345678.jpg" alt="Chicken Kury Dresses">
-        <p>Chicken Kury Dresses</p>
+    </div>
+
+    <!-- Suits Products -->
+    <div class="products-view" id="suits-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Suits</h3>
       </div>
-      <div class="category">
-        <img src="https://cdn.pixabay.com/photo/2020/01/20/18/38/woman-4779383_1280.jpg" alt="Anarkali Dresses">
-        <p>Anarkali Dresses</p>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/your_suit1.jpg" alt="Classic Cream Suit">
+          <div class="product-info">
+            <span class="product-name">Classic Cream Suit</span>
+            <span class="product-price">₹2499</span>
+          </div>
+        </div>
+        <!-- Repeat for up to 30+ products -->
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Suit (To Add)">
+          <div class="product-info">
+            <span class="product-name">Suit (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
       </div>
-      <div class="category">
-        <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/products/IndigoCottonDress.jpg?v=1644567890" alt="Mall Cotton Dresses">
-        <p>Mall Cotton Dresses</p>
+    </div>
+
+    <!-- Repeat the same pattern for other categories -->
+
+    <div class="products-view" id="long-frocks-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Long Frocks</h3>
       </div>
-      <div class="category">
-        <img src="https://images.pexels.com/photos/1616402/pexels-photo-1616402.jpeg" alt="Lehenga's">
-        <p>Lehenga's</p>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/your_frock1.jpg" alt="Floral Long Frock">
+          <div class="product-info">
+            <span class="product-name">Floral Long Frock</span>
+            <span class="product-price">₹2300</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Long Frock (To Add)">
+          <div class="product-info">
+            <span class="product-name">Long Frock (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
       </div>
-      <div class="category">
-        <img src="https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg" alt="Dupatta's">
-        <p>Dupatta's</p>
+    </div>
+
+    <div class="products-view" id="chicken-kury-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Chicken Kury Dresses</h3>
+      </div>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/chicken_kury1.jpg" alt="Classic Chicken Kury">
+          <div class="product-info">
+            <span class="product-name">Classic Chicken Kury</span>
+            <span class="product-price">₹2100</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Chicken Kury Dress (To Add)">
+          <div class="product-info">
+            <span class="product-name">Chicken Kury Dress (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-view" id="anarkali-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Anarkali Dresses</h3>
+      </div>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/anarkali1.jpg" alt="Pink Anarkali Dress">
+          <div class="product-info">
+            <span class="product-name">Pink Anarkali Dress</span>
+            <span class="product-price">₹3199</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Anarkali Dress (To Add)">
+          <div class="product-info">
+            <span class="product-name">Anarkali Dress (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-view" id="mall-cotton-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Mall Cotton Dresses</h3>
+      </div>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/cotton1.jpg" alt="Indigo Cotton Dress">
+          <div class="product-info">
+            <span class="product-name">Indigo Cotton Dress</span>
+            <span class="product-price">₹1999</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Mall Cotton Dress (To Add)">
+          <div class="product-info">
+            <span class="product-name">Mall Cotton Dress (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-view" id="lehenga-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Lehenga's</h3>
+      </div>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/lehenga1.jpg" alt="Classic Lehenga">
+          <div class="product-info">
+            <span class="product-name">Classic Lehenga</span>
+            <span class="product-price">₹4999</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Lehenga (To Add)">
+          <div class="product-info">
+            <span class="product-name">Lehenga (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-view" id="dupatta-products">
+      <div class="products-header">
+        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
+        <h3>Dupatta's</h3>
+      </div>
+      <div class="products">
+        <div class="product-card">
+          <img src="https://instagram.com/p/dupatta1.jpg" alt="Silk Dupatta">
+          <div class="product-info">
+            <span class="product-name">Silk Dupatta</span>
+            <span class="product-price">₹799</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://placehold.co/150x170?text=Add+Image" alt="Dupatta (To Add)">
+          <div class="product-info">
+            <span class="product-name">Dupatta (To Add)</span>
+            <span class="product-price">₹----</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -179,5 +441,32 @@
 
   <footer>© 2025 Neha Fashion's & Boutique. All rights reserved.</footer>
 
+  <script>
+    // Show categories on nav click
+    document.getElementById('categoriesNav').onclick = function() {
+      showCategories();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    // Show products for selected category
+    document.querySelectorAll('.category').forEach(function(cat) {
+      cat.onclick = function() {
+        document.getElementById('categoriesGrid').style.display = "none";
+        document.querySelectorAll('.products-view').forEach(function(view) {
+          view.classList.remove('active');
+        });
+        var id = cat.getAttribute('data-category') + '-products';
+        var view = document.getElementById(id);
+        if(view) view.classList.add('active');
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+    });
+    // Back to categories function
+    function showCategories() {
+      document.getElementById('categoriesGrid').style.display = "";
+      document.querySelectorAll('.products-view').forEach(function(view) {
+        view.classList.remove('active');
+      });
+    }
+  </script>
 </body>
 </html>
