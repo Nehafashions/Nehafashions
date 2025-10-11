@@ -1,865 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Neha Fashion's & Boutique</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts for 'Leckerli One' if needed -->
-    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
-    <style>
-    :root {
-        --primary-color: #a874b2;
-        --secondary-color: #fff;
-        --accent-color: #e7c7ee;
-        --font-main: 'Segoe UI', 'Leckerli One', cursive;
-    }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neha Fashion's & Boutique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
     body {
-        margin: 0;
-        font-family: 'Leckerli One', cursive;
-        background: var(--accent-color);
-        color: #3f2347;
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #fff8f0;
+      color: #333;
     }
 
     header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: var(--primary-color);
-        padding: 0.2rem 1rem 0.2rem 1rem;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .logo img {
-        height: 60px;
-        width: auto;
+      background-color: #d6336c;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     nav {
-        display: flex;
-        gap: 1.5rem;
+      background: #f8d7da;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
     }
 
     nav a {
-        color: var(--secondary-color);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1.08rem;
-        padding: 0.5rem 0.8rem;
-        border-radius: 5px;
-        transition: background 0.2s;
+      text-decoration: none;
+      color: #d6336c;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
     }
 
-    nav a.active,
     nav a:hover {
-        background: #813b9d;
+      background: #ffe3ec;
     }
 
-    .share-btn {
-        background: #fff;
-        color: var(--primary-color);
-        border: none;
-        border-radius: 18px;
-        padding: 8px 18px;
-        font-weight: 600;
-        cursor: pointer;
-        margin-right: 1.5rem;
-        transition: background 0.2s, color 0.2s;
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
     }
 
-    .share-btn:hover {
-        background: #813b9d;
-        color: #fff;
-    }
-
-    .offers {
-        background: #fff6fd;
-        border-radius: 12px;
-        margin: 2rem auto 1.2rem auto;
-        padding: 1rem 2rem;
-        max-width: 800px;
-        box-shadow: 0 2px 8px #0001;
-        text-align: center;
-    }
-    .offers ul {
-        list-style: none;
-        padding: 0;
-        margin: 0.5rem auto 0 auto;
-    }
-    .offers li {
-        margin: 0.2rem 0;
-        font-size: 1.13rem;
-    }
-
-    .collection-window {
-        margin: 1.5rem auto;
-        max-width: 1000px;
-        text-align: center;
-    }
-
-    .collection-row img {
-        width: 100%;
-        max-width: 900px;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px #0001;
+    .section h2 {
+      font-size: 1.8rem;
+      color: #b03060;
+      margin-bottom: 1rem;
     }
 
     .categories {
-        margin: 2rem auto;
-        max-width: 800px;
-        text-align: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
     }
 
-    .category-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 1rem;
+    .category {
+      background: #fff;
+      border: 1px solid #f3c2d3;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      transition: transform 0.3s ease;
     }
 
-    .category-list a {
-        background: #fff;
-        color: #a874b2;
-        font-weight: 600;
-        padding: 0.7rem 1.4rem;
-        border-radius: 22px;
-        box-shadow: 0 0 4px #0002;
-        text-decoration: none;
-        font-size: 1.07rem;
-        transition: background 0.2s, color 0.2s;
-    }
-    .category-list a:hover {
-        background: #a874b2;
-        color: #fff;
+    .category:hover {
+      transform: scale(1.05);
+      background: #fff0f5;
     }
 
-    .products-section {
-        display: none;
-        margin: 2.5rem auto;
-        max-width: 1100px;
-    }
-    .products-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-        margin-top: 1.2rem;
+    .contact {
+      background: #fce4ec;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 2rem;
     }
 
-    .product-card {
-        background: #fff;
-        border-radius: 14px;
-        box-shadow: 0 2px 10px #0001;
-        width: 260px;
-        padding: 1rem 1rem 1.5rem 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
+    .contact p {
+      margin: 0.5rem 0;
     }
 
-    .product-card img {
-        width: 100%;
-        height: 260px;
-        object-fit: cover;
-        border-radius: 11px;
-        margin-bottom: 0.7rem;
-    }
-
-    .product-title {
-        font-size: 1.13rem;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 0.3rem;
-    }
-
-    .product-price {
-        color: #a874b2;
-        font-weight: bold;
-        font-size: 1.19rem;
-        margin-bottom: 0.4rem;
-    }
-
-    .product-size {
-        margin-bottom: 0.6rem;
-    }
-    .product-size label {
-        font-weight: 500;
-    }
-    .product-size select {
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        padding: 0.23rem 0.7rem;
-        font-size: 1rem;
-        margin-left: 0.4rem;
-    }
-
-    .add-cart-btn {
-        background: #a874b2;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.6rem 1.3rem;
-        font-weight: 600;
-        font-size: 1rem;
-        cursor: pointer;
-        margin-top: 0.7rem;
-        transition: background 0.2s;
-    }
-
-    .add-cart-btn:hover {
-        background: #813b9d;
-    }
-
-    .product-share-btn {
-        position: absolute;
-        top: 11px;
-        right: 14px;
-        background: #fff;
-        color: #a874b2;
-        border: none;
-        border-radius: 50%;
-        width: 34px;
-        height: 34px;
-        font-size: 1.13rem;
-        cursor: pointer;
-        box-shadow: 0 1px 5px #0001;
-        transition: background 0.2s;
-    }
-    .product-share-btn:hover {
-        background: #a874b2;
-        color: #fff;
-    }
-
-    /* Cart Styles */
-    .cart-section {
-        display: none;
-        margin: 2.5rem auto;
-        max-width: 700px;
-        background: #fff;
-        border-radius: 14px;
-        box-shadow: 0 2px 10px #0001;
-        padding: 2rem;
-    }
-    #cart-items {
-        margin-bottom: 1.2rem;
-    }
-    .cart-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #eee;
-        padding: 0.6rem 0;
-        font-size: 1.1rem;
-    }
-    .cart-item:last-child {
-        border-bottom: none;
-    }
-    .cart-item-title {
-        flex: 3;
-    }
-    .cart-item-size {
-        flex: 1;
-        text-align: right;
-    }
-    .cart-item-price {
-        flex: 2;
-        text-align: right;
-    }
-    .cart-item-remove {
-        flex: 0.6;
-        text-align: right;
-        color: #a874b2;
-        cursor: pointer;
-        font-weight: bold;
-        margin-left: 1rem;
-    }
-    #cart-total {
-        font-size: 1.18rem;
-        font-weight: 700;
-        text-align: right;
-        margin-bottom: 1.2rem;
-    }
-    #checkout-btn {
-        background: #a874b2;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        float: right;
-        transition: background 0.2s;
-    }
-    #checkout-btn:hover {
-        background: #813b9d;
-    }
-
-    .checkout-section {
-        display: none;
-        margin: 2.5rem auto;
-        max-width: 550px;
-        background: #fff;
-        border-radius: 14px;
-        box-shadow: 0 2px 10px #0001;
-        padding: 2rem;
-    }
-    .checkout-section h2 {
-        text-align: center;
-        margin-bottom: 1.3rem;
-    }
-    .checkout-field {
-        margin-bottom: 1.1rem;
-    }
-    .checkout-field label {
-        display: block;
-        margin-bottom: 0.3rem;
-        font-weight: 500;
-    }
-    .checkout-field input,
-    .checkout-field textarea,
-    .checkout-field select {
-        width: 100%;
-        padding: 0.5rem 0.7rem;
-        border: 1px solid #ccc;
-        border-radius: 7px;
-        font-size: 1rem;
-        background: #faf7fb;
-    }
-    .checkout-field textarea {
-        min-height: 60px;
-        resize: vertical;
-    }
-    .checkout-pay-btn {
-        background: #a874b2;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        float: right;
-        margin-top: 1rem;
-        margin-bottom: 1.5rem;
-        transition: background 0.2s;
-    }
-    .checkout-pay-btn:hover {
-        background: #813b9d;
-    }
-    .back-to-cart-btn {
-        background: #eee;
-        color: #a874b2;
-        border: none;
-        border-radius: 8px;
-        padding: 0.7rem 1.5rem;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        margin-top: 0.8rem;
-        transition: background 0.2s;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 5000;
-        left: 0; top: 0; width: 100vw; height: 100vh;
-        background: rgba(120, 50, 128, 0.12);
-        justify-content: center;
-        align-items: center;
-    }
-    .modal-content {
-        background: #fff;
-        padding: 2.3rem 2.2rem 2rem 2.2rem;
-        border-radius: 16px;
-        box-shadow: 0 2px 16px #0003;
-        text-align: center;
-        max-width: 350px;
-    }
-    .modal-content h2 {
-        color: #a874b2;
-        margin-bottom: 0.7rem;
-    }
-    .modal-content button {
-        background: #a874b2;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 1rem;
-        transition: background 0.2s;
-    }
-    .modal-content button:hover {
-        background: #813b9d;
+    .contact a {
+      color: #d6336c;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     footer {
-        background: #a874b2;
-        color: #fff;
-        padding: 2rem 1rem 1rem 1rem;
-        margin-top: 2rem;
-        border-radius: 18px 18px 0 0;
-        text-align: center;
-    }
-    .contact-details {
-        margin-bottom: 0.7rem;
-    }
-    .contact-details a {
-        color: #fff;
-        text-decoration: underline;
+      text-align: center;
+      padding: 1rem;
+      background: #d6336c;
+      color: white;
+      margin-top: 2rem;
     }
 
-    @media (max-width: 900px) {
-        .products-list {
-            gap: 1rem;
-        }
-        .product-card {
-            width: 95vw;
-            max-width: 350px;
-        }
-    }
     @media (max-width: 600px) {
-        .category-list {
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-        header {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.5rem 0.6rem 0.5rem 0.5rem;
-        }
-        .logo img {
-            height: 42px;
-        }
-        nav {
-            gap: 0.7rem;
-        }
-        .product-card img {
-            height: 190px;
-        }
-        .products-section,
-        .cart-section {
-            padding: 0.7rem;
-        }
+      header {
+        font-size: 1.8rem;
+      }
+
+      .section h2 {
+        font-size: 1.4rem;
+      }
     }
-    </style>
+  </style>
 </head>
 <body>
-    <!-- Header with share option -->
-    <header>
-        <div class="logo">
-            <img src="logo1.png" alt="Neha Fashion's & Boutique">
-        </div>
-        <button class="share-btn" onclick="shareSite()">Share</button>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#categories">Categories</a>
-            <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
-        </nav>
-    </header>
 
-    <!-- Main: Home Page -->
-    <main id="home">
-        <section class="collection-window">
-            <h2>Our Collection</h2>
-            <div class="collection-row">
-                <img src="ourcollection1.png" alt="Our Collection Image" />
-            </div>
-        </section>
-        <section id="categories" class="categories">
-            <h2>Shop by Category</h2>
-            <div class="category-list">
-                <a href="#kashmire">Kashmire Dresses</a>
-                <a href="#suits">Suits</a>
-                <a href="#longfrocks">Long Frocks</a>
-                <a href="#chickenkury">Chicken Kury Dresses</a>
-                <a href="#anarkali">Anarkali Dresses</a>
-                <a href="#mallcotton">Mall Cotton Dresses</a>
-                <a href="#lehenga">Lehenga's</a>
-                <a href="#dupatta">Dupatta's</a>
-            </div>
-        </section>
-    </main>
+  <header>Neha Fashion's & Boutique</header>
 
-    <!-- Category Products Page -->
-    <section id="products" class="products-section">
-        <h2 id="product-category-title">Products</h2>
-        <div id="products-list" class="products-list">
-            <!-- Products are rendered here by JS -->
-        </div>
-    </section>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Categories</a>
+    <a href="#">Cart (0)</a>
+    <a href="#">Contact</a>
+  </nav>
 
-    <!-- Cart Page -->
-    <section id="cart" class="cart-section">
-        <h2>Your Cart</h2>
-        <div id="cart-items"></div>
-        <div id="cart-total"></div>
-        <button id="checkout-btn">Checkout</button>
-    </section>
-
-    <!-- Checkout Page Modal -->
-    <section id="checkout" class="checkout-section">
-        <h2>Checkout</h2>
-        <form id="checkout-form">
-            <div class="checkout-field">
-                <label for="customer-name">Name</label>
-                <input type="text" id="customer-name" name="customer-name" required>
-            </div>
-            <div class="checkout-field">
-                <label for="customer-phone">Phone</label>
-                <input type="text" id="customer-phone" name="customer-phone" required>
-            </div>
-            <div class="checkout-field">
-                <label for="customer-address">Address</label>
-                <textarea id="customer-address" name="customer-address" required></textarea>
-            </div>
-            <div class="checkout-field">
-                <label for="payment-method">Payment Method</label>
-                <select id="payment-method" name="payment-method" required>
-                    <option value="">Select</option>
-                    <option value="card">Card</option>
-                    <option value="upi">UPI</option>
-                    <option value="cod">Cash on Delivery</option>
-                </select>
-            </div>
-            <div id="payment-details"></div>
-            <button type="submit" class="checkout-pay-btn">Pay Now</button>
-            <button type="button" class="back-to-cart-btn" onclick="showCart()">Back to Cart</button>
-        </form>
-    </section>
-
-    <!-- Order Success Modal -->
-    <div id="order-success-modal" class="modal">
-        <div class="modal-content">
-            <h2>Order Placed!</h2>
-            <p>Your order was placed. We'll contact you soon.</p>
-            <button onclick="closeOrderModal()">OK</button>
-        </div>
+  <div class="section">
+    <h2>🛍️ Shop by Category</h2>
+    <div class="categories">
+      <div class="category">Kashmire Dresses</div>
+      <div class="category">Suits</div>
+      <div class="category">Long Frocks</div>
+      <div class="category">Chicken Kury Dresses</div>
+      <div class="category">Anarkali Dresses</div>
+      <div class="category">Mall Cotton Dresses</div>
+      <div class="category">Lehenga's</div>
+      <div class="category">Dupatta's</div>
     </div>
 
-    <!-- Contact Details -->
-    <footer>
-        <div class="contact-details">
-            <h3>Contact Us</h3>
-            <p>Email: nehafashionsandboutique@gmail.com</p>
-            <p>Instagram: <a href="https://www.instagram.com/nehafashionsandboutique/" target="_blank">@nehafashionsandboutique</a></p>
-            <p>Phone: +91 9032337779</p>
-            <p>Address: #33-38, Kondapalli Baypass Road, Beside Muthoot Money, Kondapalli Municipality, NTR DIST, India</p>
-        </div>
-        <div class="copyright">
-            &copy; 2025 Neha Fashion's & Boutique. All rights reserved.
-        </div>
-    </footer>
+    <div class="contact">
+      <h2>📞 Contact Us</h2>
+      <p>Email: <a href="mailto:nehafashionsandboutique@gmail.com">nehafashionsandboutique@gmail.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/nehafashionsandboutique" target="_blank">@nehafashionsandboutique</a></p>
+      <p>Phone: <a href="tel:+919032337779">+91 9032337779</a></p>
+      <p>Address: #33-38, Kondapalli Baypass Road, Beside Muthoot Money, Kondapalli Municipality, NTR DIST, India</p>
+    </div>
+  </div>
 
-    <script>
-    // --- Product Data ---
-    const productsData = [
-        {
-            id: 'kashmire1',
-            category: 'kashmire',
-            title: "Blue Kashmire Dress",
-            price: 3499,
-            sizes: ["S", "M", "L", "XL"],
-            img: "image3.jpg"
-        },
-        {
-            id: 'frock1',
-            category: 'longfrocks',
-            title: "Pink Designer Long Frock",
-            price: 3999,
-            sizes: ["S", "M", "L"],
-            img: "image4.jpg"
-        },
-        {
-            id: 'suit1',
-            category: 'suits',
-            title: "Navy Blue Embroidered Suit",
-            price: 2899,
-            sizes: ["M", "L", "XL"],
-            img: "image2.jpg"
-        },
-        {
-            id: 'lehenga1',
-            category: 'lehenga',
-            title: "Peach Bridal Lehenga",
-            price: 7999,
-            sizes: ["S", "M", "L"],
-            img: "image2-3.jpg"
-        }
-        // Add more products here
-    ];
+  <footer>© 2025 Neha Fashion's & Boutique. All rights reserved.</footer>
 
-    // --- Cart State ---
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-    // --- Navigation Elements ---
-    const navLinks = document.querySelectorAll('nav a');
-    const homeSection = document.getElementById('home');
-    const productsSection = document.getElementById('products');
-    const cartSection = document.getElementById('cart');
-    const checkoutSection = document.getElementById('checkout');
-    const orderModal = document.getElementById('order-success-modal');
-
-    // --- Navigation Logic ---
-    function setActiveNav(name) {
-        navLinks.forEach(link => {
-            if (name && link.getAttribute('href').includes(name)) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const hash = link.getAttribute('href').replace('#', '');
-            if (hash === "home") {
-                showHome();
-            } else if (hash === "categories") {
-                showCategories();
-            } else if (hash === "cart") {
-                showCart();
-            }
-            setActiveNav(hash);
-        });
-    });
-
-    // --- Category Navigation ---
-    const categoryLinks = document.querySelectorAll('.category-list a');
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const category = link.getAttribute('href').substring(1);
-            showProductsForCategory(category, link.textContent);
-            setActiveNav(null);
-            window.scrollTo(0, 0);
-        });
-    });
-
-    // --- Navigation Page Show Functions ---
-    function showHome() {
-        homeSection.style.display = "block";
-        productsSection.style.display = "none";
-        cartSection.style.display = "none";
-        checkoutSection.style.display = "none";
-    }
-    function showCategories() {
-        homeSection.style.display = "block";
-        productsSection.style.display = "none";
-        cartSection.style.display = "none";
-        checkoutSection.style.display = "none";
-        window.scrollTo(0, document.getElementById("categories").offsetTop - 80);
-    }
-    function showProductsForCategory(category, title) {
-        document.getElementById('product-category-title').textContent = title;
-        homeSection.style.display = "none";
-        productsSection.style.display = "block";
-        cartSection.style.display = "none";
-        checkoutSection.style.display = "none";
-        renderProducts(category);
-    }
-    function showCart() {
-        homeSection.style.display = "none";
-        productsSection.style.display = "none";
-        cartSection.style.display = "block";
-        checkoutSection.style.display = "none";
-        renderCart();
-    }
-    function showCheckout() {
-        homeSection.style.display = "none";
-        productsSection.style.display = "none";
-        cartSection.style.display = "none";
-        checkoutSection.style.display = "block";
-        populatePaymentDetails();
-        document.getElementById('checkout-form').reset();
-    }
-
-    // --- Product Rendering ---
-    function renderProducts(category) {
-        const container = document.getElementById('products-list');
-        container.innerHTML = '';
-        const filtered = productsData.filter(p => p.category === category);
-        filtered.forEach(product => {
-            container.appendChild(createProductCard(product));
-        });
-    }
-    function createProductCard(product) {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-            <button class="product-share-btn" title="Share Product" onclick="shareProduct('${product.title}', '${window.location.href}')">🔁</button>
-            <img src="${product.img}" alt="${product.title}">
-            <div class="product-title">${product.title}</div>
-            <div class="product-price">₹${product.price}</div>
-            <div class="product-size">
-                <label for="size-${product.id}">Size:</label>
-                <select id="size-${product.id}">
-                    ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
-                </select>
-            </div>
-            <button class="add-cart-btn" onclick="addToCart('${product.id}')">Add to Cart</button>
-        `;
-        return card;
-    }
-
-    // --- Cart Functions ---
-    function addToCart(productId) {
-        const product = productsData.find(p => p.id === productId);
-        const size = document.getElementById(`size-${productId}`).value;
-        const itemKey = `${productId}-${size}`;
-        const existing = cart.find(item => item.key === itemKey);
-        if (existing) {
-            existing.qty += 1;
-        } else {
-            cart.push({
-                key: itemKey,
-                id: productId,
-                title: product.title,
-                size,
-                price: product.price,
-                img: product.img,
-                qty: 1
-            });
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        alert('Added to cart!');
-    }
-    function renderCart() {
-        const cartItemsDiv = document.getElementById('cart-items');
-        cartItemsDiv.innerHTML = '';
-        let total = 0;
-        if (cart.length === 0) {
-            cartItemsDiv.innerHTML = "<p>Your cart is empty!</p>";
-            document.getElementById('cart-total').textContent = "";
-            return;
-        }
-        cart.forEach((item, i) => {
-            total += item.price * item.qty;
-            const div = document.createElement('div');
-            div.className = 'cart-item';
-            div.innerHTML = `
-                <span class="cart-item-title">${item.title}</span>
-                <span class="cart-item-size">(${item.size})</span>
-                <span class="cart-item-price">₹${item.price} x ${item.qty}</span>
-                <span class="cart-item-remove" onclick="removeFromCart(${i})">&times;</span>
-            `;
-            cartItemsDiv.appendChild(div);
-        });
-        document.getElementById('cart-total').textContent = `Total: ₹${total}`;
-    }
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart();
-        updateCartCount();
-    }
-    function updateCartCount() {
-        document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-    }
-
-    // --- Share Functions ---
-    function shareSite() {
-        if (navigator.share) {
-            navigator.share({
-                title: "Neha Fashion's & Boutique",
-                url: window.location.href
-            });
-        } else {
-            prompt("Copy this url to share:", window.location.href);
-        }
-    }
-    function shareProduct(title, url) {
-        if (navigator.share) {
-            navigator.share({
-                title,
-                url
-            });
-        } else {
-            prompt("Copy this product url to share:", url);
-        }
-    }
-
-    // --- Checkout Functions ---
-    document.getElementById("checkout-btn").onclick = function() {
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-        showCheckout();
-    };
-    function populatePaymentDetails() {
-        const paymentMethod = document.getElementById('payment-method');
-        const paymentDetails = document.getElementById('payment-details');
-        function updateFields() {
-            if (paymentMethod.value === 'card') {
-                paymentDetails.innerHTML = `
-                    <div class="checkout-field">
-                        <label for="card-number">Card Number</label>
-                        <input type="text" id="card-number" name="card-number" maxlength="16" required>
-                    </div>
-                    <div class="checkout-field">
-                        <label for="card-expiry">Expiry Date</label>
-                        <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" required>
-                    </div>
-                    <div class="checkout-field">
-                        <label for="card-cvv">CVV</label>
-                        <input type="password" id="card-cvv" name="card-cvv" maxlength="3" required>
-                    </div>
-                `;
-            } else if (paymentMethod.value === 'upi') {
-                paymentDetails.innerHTML = `
-                    <div class="checkout-field">
-                        <label for="upi-id">Your UPI ID</label>
-                        <input type="text" id="upi-id" name="upi-id" placeholder="example@upi" required>
-                    </div>
-                `;
-            } else {
-                paymentDetails.innerHTML = '';
-            }
-        }
-        paymentMethod.onchange = updateFields;
-        updateFields();
-    }
-
-    document.getElementById("checkout-form").onsubmit = function(e) {
-        e.preventDefault();
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        showHome();
-        orderModal.style.display = 'flex';
-    };
-    function closeOrderModal() {
-        orderModal.style.display = 'none';
-        showHome();
-    }
-
-    // --- Expose for button onclick ---
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
-    window.shareProduct = shareProduct;
-    window.shareSite = shareSite;
-    window.showCart = showCart;
-    window.closeOrderModal = closeOrderModal;
-
-    // --- Initial Page Load ---
-    function showInitialPage() {
-        showHome();
-        setActiveNav('home');
-        updateCartCount();
-    }
-    showInitialPage();
-    </script>
 </body>
 </html>
