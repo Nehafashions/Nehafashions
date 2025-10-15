@@ -1,614 +1,353 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neha Fashion's & Boutique</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #a874b2;
-      --primary-light: #e9d6f5;
-      --accent-color: #d6336c;
-      --background: #faf6fb;
-    }
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: var(--background);
-      color: #333;
-    }
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-    nav {
-      background: var(--primary-light);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 1rem;
-    }
-    nav a {
-      text-decoration: none;
-      color: var(--primary-color);
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background 0.3s ease, color 0.3s;
-      cursor: pointer;
-    }
-    nav a.active, nav a:focus {
-      background: #f5e6fa;
-      color: var(--accent-color);
-      outline: none;
-    }
-    nav a:hover {
-      background: #f5e6fa;
-      color: var(--accent-color);
-    }
-    .section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
-    }
-    .section h2 {
-      font-size: 1.8rem;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .category {
-      background: #fff;
-      border: 1px solid var(--primary-light);
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-      font-weight: 600;
-      transition: transform 0.3s ease, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .category:hover, .category.selected {
-      transform: scale(1.05);
-      background: #f5e6fa;
-      box-shadow: 0 2px 8px rgba(168,116,178,0.1);
-    }
-    .category img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      height: 120px;
-      object-fit: cover;
-    }
-    .products-view {
-      display: none;
-      animation: fadeIn 0.4s;
-    }
-    .products-view.active {
-      display: block;
-    }
-    .products-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-    .back-link {
-      color: var(--primary-color);
-      margin-right: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-    }
-    .product-card {
-      background: #fff;
-      border: 1px solid var(--primary-light);
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      min-height: 290px;
-      min-width: 160px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 1px 4px rgba(168,116,178,0.04);
-    }
-    .product-card img {
-      width: 100%;
-      max-width: 150px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      background: #f5e6fa;
-    }
-    .product-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      width: 100%;
-      align-items: center;
-    }
-    .product-name {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--primary-color);
-    }
-    .product-price {
-      color: var(--accent-color);
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    .contact {
-      background: #fce4ec;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-top: 2rem;
-    }
-    .contact p {
-      margin: 0.5rem 0;
-    }
-    .contact a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: var(--primary-color);
-      color: white;
-      margin-top: 2rem;
-    }
-    .cart-section {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(168,116,178,0.10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    .cart-header {
-      background: #fff;
-      border-radius: 12px 12px 0 0;
-      padding: 1rem 2rem 0.5rem 2rem;
-      box-shadow: 0 2px 12px rgba(168,116,178,0.12);
-      width: 350px;
-      position: relative;
-      text-align: center;
-    }
-    .close-cart {
-      position: absolute;
-      left: 1rem;
-      top: 1rem;
-      color: var(--primary-color, #a874b2);
-      font-size: 1.2rem;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .cart-content {
-      background: #fff;
-      border-radius: 0 0 12px 12px;
-      box-shadow: 0 2px 12px rgba(168,116,178,0.12);
-      padding: 1rem 2rem 2rem 2rem;
-      width: 350px;
-    }
-    .home-section {
-      display: block;
-      animation: fadeIn 0.4s;
-    }
-    .home-section.inactive {
-      display: none;
-    }
-    @media (max-width: 600px) {
-      header {
-        font-size: 1.8rem;
-      }
-      .section h2 {
-        font-size: 1.4rem;
-      }
-      .products-header h3 {
-        font-size: 1rem;
-      }
-      .categories {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      }
-      .products {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      }
-      .product-card {
-        min-width: 120px;
-      }
-      .product-card img {
-        max-width: 110px;
-        height: 120px;
-      }
-      .cart-header, .cart-content {
-        width: 90vw;
-        min-width: 0;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neha Fashions and Boutique - Your destination for elegant ethnic wear, designer suits, lehengas, and more">
+    <meta name="keywords" content="fashion, boutique, ethnic wear, designer suits, lehengas, kashmiri suits">
+    <title>Neha Fashions and Boutique - Designer Ethnic Wear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-  <header>Neha Fashion's & Boutique</header>
-
-  <nav>
-    <a href="#" id="homeNav" class="active">Home</a>
-    <a id="categoriesNav">Categories</a>
-    <a href="#" id="cartNav">Cart (0)</a>
-  </nav>
-
-  <div class="section">
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +91 7416412223</span>
+                    <span><i class="fas fa-envelope"></i> nehafashionsandboutique@gmail.com</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/nehafashionsandboutique/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo1.png" alt="Neha Fashions Logo">
+                    <span>Neha Fashions & Boutique</span>
+                </div>
+                
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <a href="#cart" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <!-- Home Section -->
-    <div id="homeSection" class="home-section">
-      <h2>Welcome to Neha Fashion's & Boutique!</h2>
-      <img src="https://raw.githubusercontent.com/Nehafashions/Nehafashions/main/logo.png" alt="Neha Fashion's Boutique Logo" style="max-width: 10px; width: 50%; display: block; margin: 1rem auto 1rem auto; border-radius: 10px; background: #e9d6f5;" />
-      <p>
-        Discover our latest collection of ethnic wear, dresses, lehengas, dupattas, and more. <br>
-        Find your perfect style with us for every occasion.
-      </p>
-      <img src="https://images.pexels.com/photos/1616401/pexels-photo-1616401.jpeg" alt="Neha Fashion's Boutique" style="max-width: 400px; width: 100%; border-radius: 12px; margin-top: 1.5rem;">
-      <div class="contact">
-        <h2>📞 Contact Us</h2>
-        <p>Email: <a href="mailto:nehafashionsandboutique@gmail.com">nehafashionsandboutique@gmail.com</a></p>
-        <p>Instagram: <a href="https://instagram.com/nehafashionsandboutique" target="_blank">@nehafashionsandboutique</a></p>
-        <p>Phone: <a href="tel:+919032337779">+91 9032337779</a></p>
-        <p>Address: #33-38, Kondapalli Baypass Road, Beside Muthoot Money, Kondapalli Municipality, NTR DIST, India</p>
-      </div>
-    </div>
+    <section id="home" class="home-section">
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="images/slider1.jpg" alt="Fashion Collection">
+                <div class="slide-content">
+                    <h1>Welcome to Neha Fashions & Boutique</h1>
+                    <p>Discover Elegance in Every Thread</p>
+                    <button class="btn-primary" onclick="scrollToSection('categories')">Shop Now</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images/slider-2.jpg" alt="Designer Collection">
+                <div class="slide-content">
+                    <h1>Designer Collection 2024</h1>
+                    <p>Exclusive Ethnic Wear for Every Occasion</p>
+                    <button class="btn-primary" onclick="scrollToSection('categories')">Explore Collection</button>
+                </div>
+            </div>
+            <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
 
-    <!-- Categories Grid -->
-    <div id="categoriesGrid" style="display:none;">
-      <h2>🛍️ Shop by Category</h2>
-      <div class="categories">
-        <div class="category" data-category="kashmire">
-          <img src="https://images.pexels.com/photos/1616401/pexels-photo-1616401.jpeg" alt="Kashmire Dresses">
-          <p>Kashmire Dresses</p>
+        <!-- Features -->
+        <div class="features">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-truck"></i>
+                        <h3>Free Shipping</h3>
+                        <p>On orders above ₹999</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-undo"></i>
+                        <h3>Easy Returns</h3>
+                        <p>7 days return policy</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Payment</h3>
+                        <p>100% secure transactions</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Dedicated customer service</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="category" data-category="suits">
-          <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/adult-1867483_1280.jpg" alt="Suits">
-          <p>Suits</p>
-        </div>
-        <div class="category" data-category="long-frocks">
-          <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Long Frocks">
-          <p>Long Frocks</p>
-        </div>
-        <div class="category" data-category="chicken-kury">
-          <img src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/12345678/2021/7/15/12345678.jpg" alt="Chicken Kury Dresses">
-          <p>Chicken Kury Dresses</p>
-        </div>
-        <div class="category" data-category="anarkali">
-          <img src="https://cdn.pixabay.com/photo/2020/01/20/18/38/woman-4779383_1280.jpg" alt="Anarkali Dresses">
-          <p>Anarkali Dresses</p>
-        </div>
-        <div class="category" data-category="mall-cotton">
-          <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/products/IndigoCottonDress.jpg?v=1644567890" alt="Mall Cotton Dresses">
-          <p>Mall Cotton Dresses</p>
-        </div>
-        <div class="category" data-category="lehenga">
-          <img src="https://images.pexels.com/photos/1616402/pexels-photo-1616402.jpeg" alt="Lehenga's">
-          <p>Lehenga's</p>
-        </div>
-        <div class="category" data-category="dupatta">
-          <img src="https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg" alt="Dupatta's">
-          <p>Dupatta's</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Kashmire Dresses Products -->
-    <div class="products-view" id="kashmire-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Kashmire Dresses</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/your_image1.jpg" alt="Elegant Red Kashmire Dress">
-          <div class="product-info">
-            <span class="product-name">Elegant Red Kashmire Dress</span>
-            <span class="product-price">₹2999</span>
-          </div>
+        <!-- Categories Section -->
+        <div id="categories" class="categories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Shop by Category</h2>
+                    <p>Explore our exclusive collection of ethnic wear</p>
+                </div>
+                
+                <div class="category-grid">
+                    <div class="category-card" onclick="showProductsForCategory('kashmire', 'Kashmiri Suits')">
+                        <div class="category-image">
+                            <img src="images/ourcollection1.png" alt="Kashmiri Suits">
+                            <div class="category-overlay">
+                                <h3>Kashmiri Suits</h3>
+                                <p>View Collection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" onclick="showProductsForCategory('longfrocks', 'Long Frocks')">
+                        <div class="category-image">
+                            <img src="images/ourcollection1.png" alt="Long Frocks">
+                            <div class="category-overlay">
+                                <h3>Long Frocks</h3>
+                                <p>View Collection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" onclick="showProductsForCategory('suits', 'Designer Suits')">
+                        <div class="category-image">
+                            <img src="images/ourcollection1.png" alt="Designer Suits">
+                            <div class="category-overlay">
+                                <h3>Designer Suits</h3>
+                                <p>View Collection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" onclick="showProductsForCategory('lehenga', 'Lehengas')">
+                        <div class="category-image">
+                            <img src="images/ourcollection1.png" alt="Lehengas">
+                            <div class="category-overlay">
+                                <h3>Lehengas</h3>
+                                <p>View Collection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Add more product-cards here -->
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Kashmire Dress (To Add)">
-          <div class="product-info">
-            <span class="product-name">Kashmire Dress (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
+
+        <!-- About Section -->
+        <div id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Neha Fashions & Boutique</h2>
+                        <p>Welcome to Neha Fashions & Boutique, your premier destination for exquisite ethnic wear and designer clothing. With years of experience in the fashion industry, we bring you the finest collection of traditional and contemporary outfits.</p>
+                        <p>Our mission is to make every woman feel confident and beautiful in our carefully curated designs. From elegant Kashmiri suits to stunning lehengas, we offer a wide range of options for every occasion.</p>
+                        <ul class="about-features">
+                            <li><i class="fas fa-check"></i> Premium Quality Fabrics</li>
+                            <li><i class="fas fa-check"></i> Expert Craftsmanship</li>
+                            <li><i class="fas fa-check"></i> Latest Fashion Trends</li>
+                            <li><i class="fas fa-check"></i> Customization Available</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/ourcollection1.png" alt="About Us">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Suits Products -->
-    <div class="products-view" id="suits-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Suits</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/your_suit1.jpg" alt="Classic Cream Suit">
-          <div class="product-info">
-            <span class="product-name">Classic Cream Suit</span>
-            <span class="product-price">₹2499</span>
-          </div>
+        <!-- Contact Section -->
+        <div id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get in Touch</h2>
+                    <p>We'd love to hear from you</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info-box">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Visit Us</h3>
+                            <p>#33-38, Kondapalli Baypass Road<br>Beside Muthoot Money<br>Kondapalli Municipality, NTR DIST, India</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <h3>Call Us</h3>
+                            <p>+91 7416412223</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>nehafashionsandboutique@gmail.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <h3>Working Hours</h3>
+                            <p>Mon - Sat: 10:00 AM - 8:00 PM<br>Sunday: 11:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Your Phone" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Suit (To Add)">
-          <div class="product-info">
-            <span class="product-name">Suit (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="product-category-title">Products</h2>
+                <button class="btn-secondary" onclick="showHome()">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </button>
+            </div>
+            
+            <div class="products-grid" id="products-list">
+                <!-- Products will be dynamically loaded here -->
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Long Frocks -->
-    <div class="products-view" id="long-frocks-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Long Frocks</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/your_frock1.jpg" alt="Floral Long Frock">
-          <div class="product-info">
-            <span class="product-name">Floral Long Frock</span>
-            <span class="product-price">₹2300</span>
-          </div>
+    <!-- Cart Section -->
+    <section id="cart" class="cart-section" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shopping Cart</h2>
+                <button class="btn-secondary" onclick="showHome()">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </button>
+            </div>
+            
+            <div class="cart-content">
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be dynamically loaded here -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="cart-total" id="cart-total"></div>
+                    <button class="btn-primary btn-block" id="checkout-btn">
+                        <i class="fas fa-shopping-bag"></i> Proceed to Checkout
+                    </button>
+                    <div class="payment-methods">
+                        <p>We Accept:</p>
+                        <div class="payment-icons">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Long Frock (To Add)">
-          <div class="product-info">
-            <span class="product-name">Long Frock (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Neha Fashions & Boutique</h3>
+                    <p>Your destination for elegant ethnic wear and designer clothing. Quality, style, and tradition combined.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/nehafashionsandboutique/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#" onclick="showProductsForCategory('kashmire', 'Kashmiri Suits')">Kashmiri Suits</a></li>
+                        <li><a href="#" onclick="showProductsForCategory('longfrocks', 'Long Frocks')">Long Frocks</a></li>
+                        <li><a href="#" onclick="showProductsForCategory('suits', 'Designer Suits')">Designer Suits</a></li>
+                        <li><a href="#" onclick="showProductsForCategory('lehenga', 'Lehengas')">Lehengas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new arrivals and special offers</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Neha Fashions & Boutique. All rights reserved.</p>
+                <button class="share-btn" onclick="shareSite()">
+                    <i class="fas fa-share-alt"></i> Share Website
+                </button>
+            </div>
         </div>
-      </div>
-    </div>
+    </footer>
 
-    <!-- Chicken Kury Dresses -->
-    <div class="products-view" id="chicken-kury-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Chicken Kury Dresses</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/chicken_kury1.jpg" alt="Classic Chicken Kury">
-          <div class="product-info">
-            <span class="product-name">Classic Chicken Kury</span>
-            <span class="product-price">₹2100</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Chicken Kury Dress (To Add)">
-          <div class="product-info">
-            <span class="product-name">Chicken Kury Dress (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/917416412223" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- Anarkali Dresses -->
-    <div class="products-view" id="anarkali-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Anarkali Dresses</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/anarkali1.jpg" alt="Pink Anarkali Dress">
-          <div class="product-info">
-            <span class="product-name">Pink Anarkali Dress</span>
-            <span class="product-price">₹3199</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Anarkali Dress (To Add)">
-          <div class="product-info">
-            <span class="product-name">Anarkali Dress (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    <!-- Mall Cotton Dresses -->
-    <div class="products-view" id="mall-cotton-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Mall Cotton Dresses</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/cotton1.jpg" alt="Indigo Cotton Dress">
-          <div class="product-info">
-            <span class="product-name">Indigo Cotton Dress</span>
-            <span class="product-price">₹1999</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Mall Cotton Dress (To Add)">
-          <div class="product-info">
-            <span class="product-name">Mall Cotton Dress (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lehenga's -->
-    <div class="products-view" id="lehenga-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Lehenga's</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/lehenga1.jpg" alt="Classic Lehenga">
-          <div class="product-info">
-            <span class="product-name">Classic Lehenga</span>
-            <span class="product-price">₹4999</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Lehenga (To Add)">
-          <div class="product-info">
-            <span class="product-name">Lehenga (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dupatta's -->
-    <div class="products-view" id="dupatta-products">
-      <div class="products-header">
-        <span class="back-link" onclick="showCategories()">&#8592; Back to Categories</span>
-        <h3>Dupatta's</h3>
-      </div>
-      <div class="products">
-        <div class="product-card">
-          <img src="https://instagram.com/p/dupatta1.jpg" alt="Silk Dupatta">
-          <div class="product-info">
-            <span class="product-name">Silk Dupatta</span>
-            <span class="product-price">₹799</span>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://placehold.co/150x170?text=Add+Image" alt="Dupatta (To Add)">
-          <div class="product-info">
-            <span class="product-name">Dupatta (To Add)</span>
-            <span class="product-price">₹----</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="cart-section" id="cartSection" style="display:none;">
-    <div>
-      <div class="cart-header">
-        <span class="close-cart" onclick="hideCart()">&times; Close</span>
-        <h2>Your Cart</h2>
-      </div>
-      <div class="cart-content">
-        <p>Your cart is empty.</p>
-        <!-- In the future, display cart items here -->
-      </div>
-    </div>
-  </div>
-
-  <footer>© 2025 Neha Fashion's & Boutique. All rights reserved.</footer>
-
-  <script>
-    // Navigation handlers
-    function showSection(section) {
-      // Set active nav
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      // Hide all sections
-      document.getElementById('homeSection').classList.add('inactive');
-      document.getElementById('categoriesGrid').style.display = "none";
-      document.querySelectorAll('.products-view').forEach(function(view) {
-        view.classList.remove('active');
-      });
-
-      if (section === 'home') {
-        document.getElementById('homeNav').classList.add('active');
-        document.getElementById('homeSection').classList.remove('inactive');
-      } else if (section === 'categories') {
-        document.getElementById('categoriesNav').classList.add('active');
-        document.getElementById('categoriesGrid').style.display = "";
-      }
-    }
-
-    document.getElementById('homeNav').onclick = function(e) {
-      e.preventDefault();
-      showSection('home');
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    document.getElementById('categoriesNav').onclick = function() {
-      showSection('categories');
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    // Show products for selected category
-    document.querySelectorAll('.category').forEach(function(cat) {
-      cat.onclick = function() {
-        document.querySelectorAll('.category').forEach(c => c.classList.remove('selected'));
-        cat.classList.add('selected');
-        document.getElementById('categoriesGrid').style.display = "none";
-        document.getElementById('homeSection').classList.add('inactive');
-        document.querySelectorAll('.products-view').forEach(function(view) {
-          view.classList.remove('active');
-        });
-        var id = cat.getAttribute('data-category') + '-products';
-        var view = document.getElementById(id);
-        if(view) view.classList.add('active');
-        // Set nav active state
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        document.getElementById('categoriesNav').classList.add('active');
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-    });
-
-    // Back to categories function
-    function showCategories() {
-      document.querySelectorAll('.category').forEach(c => c.classList.remove('selected'));
-      document.getElementById('categoriesGrid').style.display = "";
-      document.getElementById('homeSection').classList.add('inactive');
-      document.querySelectorAll('.products-view').forEach(function(view) {
-        view.classList.remove('active');
-      });
-      // Set nav active state
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById('categoriesNav').classList.add('active');
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    // Cart open/close
-    document.getElementById('cartNav').onclick = function(event) {
-      event.preventDefault();
-      document.getElementById('cartSection').style.display = "flex";
-    };
-    function hideCart() {
-      document.getElementById('cartSection').style.display = "none";
-    }
-  </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
-
-
